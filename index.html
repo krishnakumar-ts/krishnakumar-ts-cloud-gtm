@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AWS Marketplace listing audit | Krishna Kumar T S</title>
+  <meta name="description" content="Free AWS Marketplace listing audit: a score out of 100 on 7 dimensions, your rank against 1,700+ live AWS Marketplace listings, and your top 3 fixes. Then get it rewritten, launched or grown.">
+  <meta name="author" content="Krishna Kumar T S">
+  <meta name="theme-color" content="#f7f5fb">
+  <link rel="canonical" href="https://krishnakumar-ts.github.io/krishnakumar-ts-cloud-gtm/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free AWS Marketplace listing audit">
+  <meta property="og:description" content="A score out of 100 on 7 dimensions, your rank against 1,700+ live AWS Marketplace listings, and your top 3 fixes.">
+  <meta property="og:image" content="https://krishnakumar-ts.github.io/krishnakumar-ts-cloud-gtm/assets/og.png">
+  <meta property="og:url" content="https://krishnakumar-ts.github.io/krishnakumar-ts-cloud-gtm/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="Krishna Kumar T S, home">
+        <span class="brand-mark" aria-hidden="true">K</span>
+        <span class="brand-text">
+          <strong>Krishna Kumar T S</strong>
+          <span>Cloud GTM &amp; AWS Marketplace</span>
+        </span>
+      </a>
+      <nav aria-label="Sections">
+        <ul class="nav-links">
+          <li><a href="index.html" aria-current="page">Work with me</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn-outline btn-small" href="https://cal.com/krishna-kumar-cloud-gtm/krishna-work-with-me" target="_blank" rel="noopener">Book a call</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO: free audit -->
+    <section class="hero" id="check" aria-labelledby="wwm-title">
+      <div class="wrap hero-grid hero-tool">
+        <div class="lead-copy">
+          <p class="label">Free AWS Marketplace listing audit</p>
+          <h1 id="wwm-title">Score your AWS Marketplace listing. <span class="accent">See where it ranks.</span></h1>
+          <p class="lead">Paste your listing copy. You get a score out of 100, your rank against <span data-bench="count">1,700+</span> live AWS Marketplace listings, and the 3 fixes that add the most points.</p>
+          <ul class="tool-facts">
+            <li><strong data-bench="count">1,700+</strong> live listings benchmarked</li>
+            <li><strong>7</strong> dimensions scored</li>
+            <li><strong>Free</strong> no sign-up, nothing stored</li>
+          </ul>
+        </div>
+
+        <div class="tool reveal">
+          <div class="tool-bar" aria-hidden="true"><i></i><i></i><i></i><span>listing audit</span></div>
+          <div id="check-input" class="tool-body">
+            <div class="tool-head">
+              <h2 class="tool-title">Paste your listing</h2>
+            </div>
+            <form id="check-form" novalidate>
+              <p class="examples">Or try an example:
+                <button type="button" class="chip-btn" data-example="before">Weak listing</button>
+                <button type="button" class="chip-btn" data-example="after">Rewritten listing</button>
+              </p>
+              <label class="field">Product title
+                <input name="title" type="text" autocomplete="off" placeholder="As it appears on AWS Marketplace">
+              </label>
+              <label class="field">Short description
+                <textarea name="short" rows="2" placeholder="The one or two lines under the title"></textarea>
+              </label>
+              <label class="field">Highlights <span>one per line</span>
+                <textarea name="highlights" rows="3"></textarea>
+              </label>
+              <details class="field-more">
+                <summary>Add long description and pricing for a full score</summary>
+                <label class="field">Long description
+                  <textarea name="long" rows="4"></textarea>
+                </label>
+                <div class="field-row">
+                  <label class="field">Pricing model
+                    <select name="model">
+                      <option value="">Not sure</option>
+                      <option value="contract">Contract (upfront)</option>
+                      <option value="usage">Usage (pay as you go)</option>
+                      <option value="free">Free only</option>
+                    </select>
+                  </label>
+                  <label class="field">Pricing unit
+                    <select name="unit">
+                      <option value="">Not sure</option>
+                      <option>Units</option>
+                      <option>Users</option>
+                      <option>Requests</option>
+                      <option>Hosts</option>
+                      <option>Data</option>
+                      <option>Bandwidth</option>
+                    </select>
+                  </label>
+                </div>
+                <label class="field">Pricing dimension description <span>the line under the price</span>
+                  <input name="dimDesc" type="text" autocomplete="off">
+                </label>
+                <label class="field-check"><input name="privateOffer" type="checkbox"> Buyers can request a private offer on the listing</label>
+              </details>
+              <p class="check-error" role="alert"></p>
+              <button class="btn btn-primary btn-block" type="submit">Score my listing</button>
+              <p class="tool-note">Copy the text from your public listing page. Title and short description are enough to start.</p>
+            </form>
+          </div>
+          <div id="check-result" class="tool-body tool-result" tabindex="-1" hidden aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section" id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="label label-code">// how the audit works</p>
+            <h2 id="how-title">Three steps. About a minute.</h2>
+          </div>
+          <p class="section-aside">Every point comes from something a buyer, a reviewer or AI search looks for on your listing.</p>
+        </div>
+
+        <ol class="steps">
+          <li class="reveal">
+            <span class="num" aria-hidden="true">1</span>
+            <h3>Paste your listing</h3>
+            <p>Copy the title, descriptions, highlights and pricing from your public listing page.</p>
+          </li>
+          <li class="reveal">
+            <span class="num" aria-hidden="true">2</span>
+            <h3>Get a score out of 100</h3>
+            <p>Seven dimensions, up to 10 points each. The table below shows what earns the points.</p>
+          </li>
+          <li class="reveal">
+            <span class="num" aria-hidden="true">3</span>
+            <h3>See your rank and fixes</h3>
+            <p>Your score is ranked against <span data-bench="count">1,700+</span> live AWS Marketplace listings. The 3 fixes that add the most points come first.</p>
+          </li>
+        </ol>
+
+        <div class="dim-table reveal">
+          <div class="dim-row dim-row-head" aria-hidden="true"><span>Dimension</span><span>What earns the points</span></div>
+          <div class="dim-row"><b>1 · AI discoverability</b><span>The title, the buyer and the job the product does, in plain words</span></div>
+          <div class="dim-row"><b>2 · Technical clarity</b><span>AWS services and integrations named, plus numbers an engineer can check</span></div>
+          <div class="dim-row"><b>3 · Deployment clarity</b><span>What happens after Subscribe, what the buyer needs first, and how fast it works</span></div>
+          <div class="dim-row"><b>4 · Security signals</b><span>Certifications, encryption, access control, audit logs and how data is handled</span></div>
+          <div class="dim-row"><b>5 · Pricing clarity</b><span>A unit the buyer can count, explained in the copy, with every price line described</span></div>
+          <div class="dim-row"><b>6 · Private-offer readiness</b><span>Contract pricing, private offer requests switched on, and terms like annual or multi-year stated</span></div>
+          <div class="dim-row"><b>7 · Protocol &amp; category fit</b><span>MCP or A2A support declared, APIs named, and the AI platforms you work with</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARKET FACTS -->
+    <section class="section" aria-labelledby="proof-title">
+      <div class="wrap">
+        <div class="band">
+          <div class="band-head">
+            <p class="label label-code label-lilac">// what <span data-bench="count">1,700+</span> live listings show</p>
+            <h2 id="proof-title">Most listings leave points on the table.</h2>
+          </div>
+          <ul class="proof-grid">
+            <li class="reveal"><p class="proof-num">100%</p><p>leave the use-cases field empty, the field AI search reads first</p></li>
+            <li class="reveal"><p class="proof-num" data-bench="stat-unitsOnly">81%</p><p>price in "Units", which tells procurement nothing</p></li>
+            <li class="reveal"><p class="proof-num" data-bench="stat-noAws">76%</p><p>name no AWS service, so engineers can't judge fit</p></li>
+            <li class="reveal"><p class="proof-num" data-bench="stat-noSecurity">65%</p><p>score zero on security signals</p></li>
+          </ul>
+          <figure class="market">
+            <figcaption><strong>How live listings score</strong><span>Typical listing: <b data-bench="median">34</b> · Top 10% starts at <b data-bench="p90">51</b> · Best live listing: <b data-bench="max">84</b></span></figcaption>
+            <div id="market-chart" class="market-chart"></div>
+            <p class="market-note">Score your listing above and your position appears on this chart.</p>
+          </figure>
+          <p class="proof-source">Live AWS Marketplace listings, read through the AWS Marketplace Discovery API (last refresh <span data-bench="snapshot">24 September 2026</span>), at most two per seller. Public listing data only.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEFORE / AFTER -->
+    <section class="section" aria-labelledby="ba-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="label label-code">// one rewrite</p>
+            <h2 id="ba-title">One listing, before and after.</h2>
+          </div>
+          <p class="section-aside">A made-up product, scored by the same audit. Load either version into the audit and you get the same score.</p>
+        </div>
+
+        <div class="ba">
+          <article class="ba-card ba-before reveal">
+            <p class="ba-tag">Before</p>
+            <h3>Northwind AI Platform</h3>
+            <p class="ba-short">Northwind is the leading, most powerful AI platform that transforms how enterprises work with data.</p>
+            <ul>
+              <li>Revolutionary AI-powered insights</li>
+              <li>Seamless integration with your stack</li>
+              <li>Enterprise-grade security</li>
+            </ul>
+            <p class="ba-meta">Pricing unit: Units · Contract · no price description · private offers off</p>
+            <details class="ba-more">
+              <summary>Long description</summary>
+              <p>Northwind delivers cutting-edge analytics for every team. Our innovative platform is robust, scalable and secure. Contact us for custom pricing.</p>
+            </details>
+            <button type="button" class="link-btn ba-run" data-example="before" data-run>Score this version</button>
+          </article>
+
+          <div class="ba-score" aria-label="Score before and after">
+            <span><small>Before</small><strong data-sample-score="before">10</strong></span>
+            <span class="ba-arrow" aria-hidden="true">→</span>
+            <span><small>After</small><strong class="ba-after-num" data-sample-score="after">81</strong></span>
+          </div>
+
+          <article class="ba-card ba-after reveal">
+            <p class="ba-tag ba-tag-after">After</p>
+            <h3>Northwind Data Cloud – plain-English analytics for Amazon Redshift</h3>
+            <p class="ba-short">Lets finance and operations teams ask questions of their Amazon Redshift data in plain English and get a chart in under 10 seconds, with no SQL.</p>
+            <ul>
+              <li>Connects to Amazon Redshift and PostgreSQL in about 15 minutes</li>
+              <li>SOC 2 Type II; data stays in your AWS region and is never used for training</li>
+              <li>Priced per user per month: 1 unit = 1 named user</li>
+            </ul>
+            <p class="ba-meta">Pricing unit: Users · Contract · price line: "One named user with full query and dashboard access, billed monthly" · private offers off</p>
+            <details class="ba-more">
+              <summary>Long description</summary>
+              <p>Setup: subscribe on AWS Marketplace, connect a read-only IAM role, and invite your team. Most teams run their first query within 30 minutes. Security: data is encrypted in transit (TLS 1.2) and at rest with AWS KMS; SSO via SAML or OIDC; every query is written to an audit log. Pricing: each unit is one named user per month. Agents and apps can query Northwind through its REST API, including from Amazon Bedrock.</p>
+            </details>
+            <button type="button" class="link-btn ba-run" data-example="after" data-run>Score this version</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- OFFERS -->
+    <section class="section" id="offers" aria-labelledby="offers-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="label label-code">// work with me</p>
+            <h2 id="offers-title">Pick the level of help.</h2>
+          </div>
+          <p class="section-aside">Every price is fixed before work starts. Send a short brief and you get the scope and invoice within one business day.</p>
+        </div>
+
+        <div class="offer-grid offer-grid-4">
+          <article class="card offer reveal">
+            <div class="offer-top">
+              <span class="icon-tile" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></span>
+              <span class="price">Free</span>
+            </div>
+            <h3>Listing Audit</h3>
+            <p class="offer-term">Instant · any listing</p>
+            <p class="offer-desc">The audit at the top of this page.</p>
+            <ul>
+              <li>Score out of 100 on all 7 dimensions</li>
+              <li>Your rank against <span data-bench="count">1,700+</span> live listings</li>
+              <li>Your top 3 fixes, ranked by points</li>
+            </ul>
+            <span class="offer-spacer"></span>
+            <a class="btn btn-outline" href="#check">Run the free audit</a>
+          </article>
+
+          <article class="card offer offer-feature reveal">
+            <div class="offer-top">
+              <span class="icon-tile" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg></span>
+              <span class="price">$500/Per</span>
+            </div>
+            <h3>Listing Optimize</h3>
+            <p class="offer-term">3 business days · existing listing</p>
+            <p class="offer-desc">I audit your listing by hand, then rewrite it.</p>
+            <ul>
+              <li>Full audit on all 7 dimensions, done by hand</li>
+              <li>Checked against the 30 questions security, procurement and technical reviewers ask before they approve</li>
+              <li>New title, descriptions, highlights, keywords and pricing wording, ready to paste</li>
+              <li>Co-sell kit if you have a live AWS deal: rep email and follow-up plan</li>
+              <li>One round of revisions</li>
+            </ul>
+            <p class="founding">Founding price for the first 3 clients. $750 after that.</p>
+            <span class="offer-spacer"></span>
+            <a class="btn btn-primary" data-enquiry="optimize" href="mailto:krishnas2404@gmail.com?subject=Listing%20Optimize">Start the optimize</a>
+          </article>
+
+          <article class="card offer reveal">
+            <div class="offer-top">
+              <span class="icon-tile" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 9h17M8 13.5h8M8 16.5h5"/></svg></span>
+              <span class="price">$1,000/Per</span>
+            </div>
+            <h3>Listing Launch</h3>
+            <p class="offer-term">Live in about 14 days · new listing</p>
+            <p class="offer-desc">Not on AWS Marketplace yet? I build your listing and take it live.</p>
+            <ul>
+              <li>Every listing field written to score high on all 7 dimensions</li>
+              <li>Set up through temporary IAM access you grant and revoke, or handed to your team ready to enter</li>
+              <li>Tested with a $0.01 offer before real pricing goes live</li>
+              <li>I stay on until AWS approves it and every review issue is closed</li>
+            </ul>
+            <p class="founding">Your engineers build the SaaS billing integration. The 14 days start once it's ready.</p>
+            <span class="offer-spacer"></span>
+            <a class="btn btn-primary" data-enquiry="launch" href="mailto:krishnas2404@gmail.com?subject=Listing%20Launch">Plan the launch</a>
+          </article>
+
+          <article class="card offer reveal">
+            <div class="offer-top">
+              <span class="icon-tile" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19c2-6 6-10 14-14-1 8-5 12-11 14z"/><path d="M9 15l-3 3M8 11l5 5"/></svg></span>
+              <span class="price">Custom</span>
+            </div>
+            <h3>Marketplace Launch Sprint</h3>
+            <p class="offer-term">6–8 weeks · listing plus go-to-market</p>
+            <p class="offer-desc">For teams that need the listing to bring in pipeline.</p>
+            <ul>
+              <li>Listing Launch or Optimize, included</li>
+              <li>Positioning against your top competitors on Marketplace</li>
+              <li>Keyword plan for Marketplace search and AI search</li>
+              <li>Proof plan: case studies, reviews and your AWS competency path</li>
+              <li>Co-sell kit for AWS field teams</li>
+              <li>Launch content: announcement post, one-pager and email</li>
+              <li>Weekly check-ins with me, start to finish</li>
+            </ul>
+            <p class="founding">Final price is fixed from your brief, before work starts.</p>
+            <span class="offer-spacer"></span>
+            <a class="btn btn-primary" data-enquiry="sprint" href="mailto:krishnas2404@gmail.com?subject=Marketplace%20Launch%20Sprint">Scope the sprint</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO DOES THE WORK -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <div class="who reveal">
+          <picture class="who-photo">
+            <source type="image/webp" srcset="assets/krishna-720.webp">
+            <img src="assets/krishna-720.jpg" width="720" height="832" alt="Portrait of Krishna Kumar T S" loading="lazy" decoding="async">
+          </picture>
+          <div class="who-copy">
+            <p class="label label-code">// who does the work</p>
+            <h2 id="about-title">Krishna Kumar T S</h2>
+            <p class="who-role">Digital Marketing Manager, AWS Marketplace GTM at SaaSNova.ai</p>
+            <ul class="who-facts">
+              <li>Contributed to SaaSNova.ai earning the <strong>AWS AI Services Competency</strong></li>
+              <li>Worked on <strong>AWS Generative AI Competency</strong> documentation for 3+ ISV clients</li>
+              <li>Built this benchmark: <strong><span data-bench="count">1,700+</span> live listings</strong> read through the AWS Marketplace Discovery API</li>
+              <li><strong>AWS Certified Cloud Practitioner</strong>, plus AWS Partner Sales and Technical accreditations</li>
+            </ul>
+            <div class="who-links">
+              <a class="btn btn-outline btn-small" href="https://www.linkedin.com/in/krishnakumar-ts/" target="_blank" rel="noopener">LinkedIn</a>
+              <a class="btn btn-outline btn-small" href="https://www.credly.com/users/krishna-gtm" target="_blank" rel="noopener">Verify badges on Credly</a>
+              <a class="btn btn-outline btn-small" href="portfolio.html">Full portfolio</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="wrap faq-wrap">
+        <div>
+          <p class="label label-code">// questions</p>
+          <h2 id="faq-title">Straight answers.</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>What changes after the optimize?</summary>
+            <p>Security reviewers find their answers on the listing instead of emailing you. Procurement can see what one unit buys. AI search can tell who the product is for and what it does. Re-run the audit here and you see the new score.</p>
+          </details>
+          <details>
+            <summary>What do you need from us?</summary>
+            <p>Your listing URL, product website, pricing, and a one-pager or deck if you have one. Anything you can prove, like certifications, integrations or customers, goes into the listing. Anything you can't prove stays out.</p>
+          </details>
+          <details>
+            <summary>Do you need access to our AWS account?</summary>
+            <p>Not for the optimize: you paste the new copy yourself. For a launch, you choose: grant temporary IAM access that you revoke once the listing is live, or I hand your team every field ready to enter.</p>
+          </details>
+          <details>
+            <summary>Who builds the SaaS integration?</summary>
+            <p>Your engineers. AWS requires SaaS products to connect for sign-up and billing, and that is code in your product. I handle the listing, the pricing setup and the AWS approval.</p>
+          </details>
+          <details>
+            <summary>Our product isn't an AI agent. Does this apply?</summary>
+            <p>Yes. Six of the seven dimensions apply to any product on AWS Marketplace. Protocol &amp; category fit only matters if AI agents will call your product.</p>
+          </details>
+          <details>
+            <summary>Why not let AI rewrite the listing?</summary>
+            <p>AI drafts words. It doesn't know which reviewer questions your listing leaves open, or which claims you can prove. Every line I write uses your facts only.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" aria-labelledby="book-title">
+      <div class="wrap">
+        <div class="cta-card">
+          <h2 id="book-title">Start with the free audit.</h2>
+          <p>It takes a minute. When you want the gaps closed, pick an offer and send a short brief.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#check">Run the free audit</a>
+            <a class="btn btn-outline" href="https://cal.com/krishna-kumar-cloud-gtm/krishna-work-with-me" target="_blank" rel="noopener">Book a 30-min call</a>
+          </div>
+          <ul class="contact-links">
+            <li><a href="portfolio.html">Hiring? See my portfolio</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p>© <span id="year">2026</span> Krishna Kumar T S</p>
+      <p><a href="portfolio.html">Portfolio</a></p>
+    </div>
+  </footer>
+
+  <script src="js/listing-benchmark.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/listing-check.js" defer></script>
+  <script src="js/enquiry.js" defer></script>
+  <script src="js/assistant.js" defer></script>
+</body>
+</html>
