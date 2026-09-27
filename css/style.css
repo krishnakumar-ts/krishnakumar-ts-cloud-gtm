@@ -981,3 +981,11 @@ ul.facts strong { color: var(--ink); font-weight: 700; }
   .enq-fields, .enq-apps { grid-template-columns: 1fr; }
   .bot { right: 0.75rem; bottom: 0.75rem; }
 }
+
+/* ---------- Ambient background: two soft glows that drift as you scroll ---------- */
+
+.ambient { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.ambient i { position: absolute; width: 60vmax; height: 60vmax; border-radius: 50%; filter: blur(80px); opacity: 0.35; will-change: transform; }
+.ambient i:first-child { top: -20vmax; right: -18vmax; background: radial-gradient(circle, #d9c6f7, transparent 65%); transform: translate3d(0, calc(var(--scroll, 0) * 40vh), 0); }
+.ambient i:last-child { bottom: -25vmax; left: -20vmax; background: radial-gradient(circle, #e7dbfb, transparent 65%); transform: translate3d(0, calc(var(--scroll, 0) * -35vh), 0); }
+@media (prefers-reduced-motion: reduce) { .ambient i { transform: none !important; } }

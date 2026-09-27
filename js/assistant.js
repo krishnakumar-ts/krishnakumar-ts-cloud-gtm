@@ -33,7 +33,7 @@
       ['Full-time', 'ft'], ['Fractional or contract', 'fr'], ['Just looking around', 'tour']] },
     ft: { say: 'Where is the role based?', set: { engagement: 'Full-time' }, opts: [['Remote', 'loc:Remote'], ['Hybrid', 'loc:Hybrid'], ['On-site', 'loc:On-site']] },
     fr: { say: 'Where is the role based?', set: { engagement: 'Fractional' }, opts: [['Remote', 'loc:Remote'], ['Hybrid', 'loc:Hybrid'], ['On-site', 'loc:On-site']] },
-    send: { rec: { name: 'Send the role', price: () => '', term: () => 'Reply within one business day', why: 'A one-minute brief: company, role, budget or salary range and start date. Your answers so far are already filled in.', cta: { label: 'Send the role', enquiry: 'hire' }, alt: { label: 'Book a 30-min interview', href: CAL_HIRE } } },
+    send: { rec: { name: 'Email Krishna', price: () => '', term: () => 'Reply within one business day', why: 'Opens a short draft email with your answers already in it. Add the role and company, then send.', cta: { label: 'Draft the email', enquiry: 'hire' }, alt: { label: 'Book a 30-min call', href: CAL_HIRE } } },
     tour: { say: 'Here\'s where to look:', links: [
       ['What I do at SaaSNova.ai', '#work'], ['Experience', '#experience'], ['Download the résumé', 'assets/Krishna-Kumar-TS-Resume.pdf'], ['Listing audit and offers', 'index.html']] }
   };
@@ -48,7 +48,7 @@
     </button>
     <section class="bot-panel" id="bot-panel" hidden aria-label="${onWork ? 'Offer guide' : 'Hiring guide'}">
       <header class="bot-head">
-        <div><strong>${onWork ? 'Find the right offer' : 'Hiring Krishna'}</strong><span>${onWork ? 'Two questions, one recommendation' : 'Three taps to a ready brief'}</span></div>
+        <div><strong>${onWork ? 'Find the right offer' : 'Hiring Krishna'}</strong><span>${onWork ? 'Two questions, one recommendation' : 'Two taps to a ready email'}</span></div>
         <button class="bot-x" type="button" aria-label="Close">×</button>
       </header>
       <div class="bot-log" aria-live="polite"></div>
