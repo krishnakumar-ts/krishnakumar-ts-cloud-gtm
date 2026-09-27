@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://krishnakumar-ts.github.io/krishnakumar-ts-cloud-gtm/sitemap.xml
