@@ -21,7 +21,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <script>document.documentElement.classList.add("js")</script>
+  <!-- Reveal animations hide content until main.js shows it; if main.js failed, show everything -->
+  <script>document.documentElement.classList.add("js");document.addEventListener("DOMContentLoaded",function(){if(!(window.KK&&window.KK.reveal))document.documentElement.classList.remove("js")})</script>
 
   <script type="application/ld+json">
   {
@@ -81,7 +82,7 @@
         <div class="hero-copy">
           <p class="label">Cloud GTM · AWS Marketplace · Partner marketing</p>
           <h1 id="hero-title">I'm Krishna. I work on <span class="accent">AWS Marketplace GTM.</span></h1>
-          <p class="hero-lede">Digital Marketing Manager, AWS Marketplace GTM at SaaSNova.ai, a US startup doing co-sell and Marketplace GTM for SaaS ISVs. I work on AWS partner and competency programs, the Marketplace Storefront, customer proof and GTM content, and I built the company's website from scratch. I'm looking for my next Cloud GTM role.</p>
+          <p class="hero-lede">Digital Marketing Manager, AWS Marketplace GTM at SaaSNova.ai, a US startup doing co-sell and Marketplace GTM for SaaS ISVs. I work on AWS competency programs, the Marketplace Storefront and customer proof, and I built the company website. </p>
           <div class="hero-actions">
             <a class="btn btn-primary" data-enquiry="hire" href="mailto:krishnas2404@gmail.com?subject=Role%20for%20Krishna%3A%20%5Brole%20title%5D&body=Company%3A%0ARole%20title%3A%0AFull-time%20or%20fractional%3A%0ALocation%20(remote%2C%20hybrid%20or%20on-site)%3A%0ABudget%20or%20salary%20range%3A%0ATarget%20start%20date%3A%0AJob%20description%20link%3A%0A">Email me</a>
             <a class="btn btn-outline" href="assets/Krishna-Kumar-TS-Resume.pdf" download>Download résumé</a>
@@ -289,7 +290,7 @@
               <span class="research-link">Score a listing</span>
             </div>
             <ul class="research-stats">
-              <li><b>100%</b>left the use-cases field empty</li>
+              <li><b>100%</b>return an empty use-cases field</li>
               <li><b data-bench="stat-unitsOnly">81%</b>price in plain "Units"</li>
               <li><b data-bench="stat-noSecurity">65%</b>score zero on security</li>
             </ul>
@@ -357,7 +358,7 @@
         <div class="section-head">
           <div>
             <p class="label label-code">// credentials</p>
-            <h2 id="cred-title">AWS certified, and verifiable.</h2>
+            <h2 id="cred-title">AWS credentials, all verifiable.</h2>
           </div>
           <p class="section-aside">Badges are on <a href="https://www.credly.com/users/krishna-gtm" target="_blank" rel="noopener">Credly</a>. Certificate copies are in <a href="https://drive.google.com/drive/folders/1IGUJcoxY2f1EwyUcaqwM5jr9USzKPsz_" target="_blank" rel="noopener">this folder</a>.</p>
         </div>
@@ -366,22 +367,22 @@
           <li class="card card-feature reveal">
             <span class="icon-tile" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7z"/><path d="m8.5 12 2.4 2.4 4.6-4.8"/></svg></span>
             <h3>AWS Certified Cloud Practitioner</h3>
-            <p>Amazon Web Services</p>
+            <p>Certification (proctored exam) · Amazon Web Services</p>
           </li>
           <li class="card reveal">
             <span class="icon-tile" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7z"/></svg></span>
             <h3>AWS Partner: Generative AI Technical</h3>
-            <p>Training badge</p>
+            <p>AWS Partner training badge</p>
           </li>
           <li class="card reveal">
             <span class="icon-tile" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7z"/></svg></span>
             <h3>AWS Partner: Sales Accredited</h3>
-            <p>Training badge</p>
+            <p>AWS Partner accreditation</p>
           </li>
           <li class="card reveal">
             <span class="icon-tile" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7z"/></svg></span>
             <h3>AWS Partner: Technical Accredited</h3>
-            <p>Training badge</p>
+            <p>AWS Partner accreditation</p>
           </li>
         </ul>
 
@@ -617,7 +618,7 @@
         renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
-        camera.position.z = camera.aspect < 1 ? 14 / Math.max(camera.aspect, 0.7) : camera.aspect > 2 ? 12 : 14;
+        camera.position.z = camera.aspect < 1 ? 14 / Math.max(camera.aspect, 0.7) : h < 300 ? 12.5 : camera.aspect > 2 ? 12 : 14;
         camera.updateProjectionMatrix();
       };
       new ResizeObserver(resize).observe(host);

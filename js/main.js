@@ -21,6 +21,14 @@
     setScroll();
   }
 
+  // --- Nav height as a CSS variable, so sticky elements sit flush under the (wrapping) nav ---
+  const nav = document.querySelector('.nav');
+  if (nav) {
+    const setNavH = () => document.documentElement.style.setProperty('--nav-h', `${Math.round(nav.getBoundingClientRect().height)}px`);
+    setNavH();
+    if ('ResizeObserver' in window) new ResizeObserver(setNavH).observe(nav);
+  }
+
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
@@ -42,6 +50,9 @@
       if (el.classList.contains('dim-med')) el.style.setProperty('--v', parseFloat(v) / 10);
     });
   }
+
+  // Everything below needs IntersectionObserver; without it, content simply shows unanimated.
+  if (!('IntersectionObserver' in window)) return;
 
   // --- Active nav link (in-page sections only) ---
   const links = [...document.querySelectorAll('.nav-links a[href^="#"]')];
@@ -101,6 +112,7 @@
     el.style.transitionDelay = reduceMotion ? '0s' : `${(i % 4) * 70}ms`;
     revealIO.observe(el);
   });
+  window.KK.reveal = true; // the inline <head> check un-hides everything if this never runs
 
   // --- Count-up for [data-count] ---
   document.querySelectorAll('[data-count]').forEach((el) => {

@@ -705,6 +705,12 @@ ul.facts strong { color: var(--ink); font-weight: 700; }
 .fix-reader { font-family: var(--mono); font-size: 0.72rem; color: var(--violet-2); }
 .fix-list p { margin-top: 0.15rem; font-size: 0.92rem; line-height: 1.5; color: var(--ink); }
 .score-cta { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.25rem; }
+.bar-na .bar-name, .bar-na .bar-val { color: var(--muted); font-weight: 400; }
+.bar-na .bar-track { background: repeating-linear-gradient(90deg, var(--lilac-soft) 0 6px, transparent 6px 10px); }
+.score-disclaimer { margin-top: 1rem; font-size: 0.78rem; line-height: 1.5; color: var(--muted); }
+.field-check-hint { align-items: flex-start; }
+.field-check-hint input { margin-top: 0.15rem; flex: none; }
+.field-check-hint small { display: block; font-weight: 400; color: var(--muted); font-size: 0.8rem; margin-top: 0.1rem; }
 
 /* ---------- Research proof (offers page) ---------- */
 
@@ -774,6 +780,7 @@ ul.facts strong { color: var(--ink); font-weight: 700; }
   font-family: var(--mono); font-size: 0.82rem; color: var(--ink);
   padding: 0.3rem 0.6rem; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--bg);
 }
+.price small { font-size: 0.72rem; color: var(--muted); }
 .offer h3 { margin-top: 1.4rem; font-size: 1.4rem; }
 .offer .offer-term { margin-top: 0.3rem; font-family: var(--mono); font-size: 0.8rem; color: var(--violet-2); }
 .offer .offer-desc { margin-top: 1rem; color: var(--muted); }
@@ -875,7 +882,13 @@ ul.facts strong { color: var(--ink); font-weight: 700; }
   .faq-wrap { grid-template-columns: 1fr; }
   .section-head { grid-template-columns: 1fr; }
   .approach-grid { grid-template-columns: 1fr; }
-  .approach-visual { top: 112px; height: 260px; z-index: 2; box-shadow: 0 12px 24px -18px rgba(22, 18, 31, 0.3); }
+  /* Phones: the stack becomes a full-width band pinned flush under the nav (height from main.js),
+     so scrolled text never shows through a gap above it. */
+  .approach-visual {
+    top: var(--nav-h, 85px); height: 220px; z-index: 2;
+    margin-inline: calc(-1 * var(--gutter)); border-radius: 0; border-width: 0 0 1px;
+    box-shadow: 0 14px 22px -20px rgba(22, 18, 31, 0.35);
+  }
   .role { grid-template-columns: 1fr; gap: 0.4rem; }
   .card-grid { grid-template-columns: 1fr; }
   .cert-groups { grid-template-columns: 1fr; gap: 2rem; }

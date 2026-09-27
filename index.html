@@ -20,7 +20,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <script>document.documentElement.classList.add("js")</script>
+  <!-- Reveal animations hide content until main.js shows it; if main.js failed, show everything -->
+  <script>document.documentElement.classList.add("js");document.addEventListener("DOMContentLoaded",function(){if(!(window.KK&&window.KK.reveal))document.documentElement.classList.remove("js")})</script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -79,6 +80,7 @@
               <label class="field">Highlights <span>one per line</span>
                 <textarea name="highlights" rows="3"></textarea>
               </label>
+              <label class="field-check field-check-hint"><input name="agent" type="checkbox"> <span>AI agents call this product (MCP server, A2A or an agent API)<small>Leave it unticked and Protocol &amp; category fit is left out of your score, so you don't lose points for it.</small></span></label>
               <details class="field-more">
                 <summary>Add long description and pricing for a full score</summary>
                 <label class="field">Long description
@@ -140,12 +142,12 @@
           <li class="reveal">
             <span class="num" aria-hidden="true">2</span>
             <h3>Get a score out of 100</h3>
-            <p>Seven dimensions, up to 10 points each. The table below shows what earns the points.</p>
+            <p>Up to 10 points per dimension. Six apply to every product; the seventh only if AI agents call yours. Points earned out of the points that apply, shown out of 100.</p>
           </li>
           <li class="reveal">
             <span class="num" aria-hidden="true">3</span>
             <h3>See your rank and fixes</h3>
-            <p>Your score is ranked against <span data-bench="count">1,700+</span> live AWS Marketplace listings. The 3 fixes that add the most points come first.</p>
+            <p>Your score is ranked against <span data-bench="count">1,700+</span> live AWS Marketplace listings, scored by the same rules. The 3 fixes that add the most points come first.</p>
           </li>
         </ol>
 
@@ -157,7 +159,7 @@
           <div class="dim-row"><b>4 · Security signals</b><span>Certifications, encryption, access control, audit logs and how data is handled</span></div>
           <div class="dim-row"><b>5 · Pricing clarity</b><span>A unit the buyer can count, explained in the copy, with every price line described</span></div>
           <div class="dim-row"><b>6 · Private-offer readiness</b><span>Contract pricing, private offer requests switched on, and terms like annual or multi-year stated</span></div>
-          <div class="dim-row"><b>7 · Protocol &amp; category fit</b><span>MCP or A2A support declared, APIs named, and the AI platforms you work with</span></div>
+          <div class="dim-row"><b>7 · Protocol &amp; category fit</b><span>Agent-facing products only: MCP or A2A support declared, APIs named, and the AI platforms you work with</span></div>
         </div>
       </div>
     </section>
@@ -171,17 +173,17 @@
             <h2 id="proof-title">Most listings leave points on the table.</h2>
           </div>
           <ul class="proof-grid">
-            <li class="reveal"><p class="proof-num">100%</p><p>leave the use-cases field empty, the field AI search reads first</p></li>
+            <li class="reveal"><p class="proof-num">100%</p><p>return an empty use-cases field through the Discovery API</p></li>
             <li class="reveal"><p class="proof-num" data-bench="stat-unitsOnly">81%</p><p>price in "Units", which tells procurement nothing</p></li>
             <li class="reveal"><p class="proof-num" data-bench="stat-noAws">76%</p><p>name no AWS service, so engineers can't judge fit</p></li>
             <li class="reveal"><p class="proof-num" data-bench="stat-noSecurity">65%</p><p>score zero on security signals</p></li>
           </ul>
           <figure class="market">
-            <figcaption><strong>How live listings score</strong><span>Typical listing: <b data-bench="median">34</b> · Top 10% starts at <b data-bench="p90">51</b> · Best live listing: <b data-bench="max">84</b></span></figcaption>
+            <figcaption><strong>How live listings score</strong><span>Typical listing: <b data-bench="median">38</b> · Top 10% starts at <b data-bench="p90">55</b> · Best live listing: <b data-bench="max">83</b></span></figcaption>
             <div id="market-chart" class="market-chart"></div>
             <p class="market-note">Score your listing above and your position appears on this chart.</p>
           </figure>
-          <p class="proof-source">Live AWS Marketplace listings, read through the AWS Marketplace Discovery API (last refresh <span data-bench="snapshot">24 September 2026</span>), at most two per seller. Public listing data only.</p>
+          <p class="proof-source">Live AWS Marketplace listings, read through the AWS Marketplace Discovery API (last refresh <span data-bench="snapshot">24 September 2026</span>), at most two per seller. Public listing data only. Scores on this chart use the 6 dimensions that apply to every product; agent-facing products are ranked on all 7 against the same listings.</p>
         </div>
       </div>
     </section>
@@ -216,9 +218,9 @@
           </article>
 
           <div class="ba-score" aria-label="Score before and after">
-            <span><small>Before</small><strong data-sample-score="before">10</strong></span>
+            <span><small>Before</small><strong data-sample-score="before">12</strong></span>
             <span class="ba-arrow" aria-hidden="true">→</span>
-            <span><small>After</small><strong class="ba-after-num" data-sample-score="after">81</strong></span>
+            <span><small>After</small><strong class="ba-after-num" data-sample-score="after">88</strong></span>
           </div>
 
           <article class="ba-card ba-after reveal">
@@ -273,7 +275,7 @@
           <article class="card offer offer-feature reveal">
             <div class="offer-top">
               <span class="icon-tile" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg></span>
-              <span class="price">$500/Per</span>
+              <span class="price">$500<small> per listing</small></span>
             </div>
             <h3>Listing Optimize</h3>
             <p class="offer-term">3 business days · existing listing</p>
@@ -293,7 +295,7 @@
           <article class="card offer reveal">
             <div class="offer-top">
               <span class="icon-tile" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 9h17M8 13.5h8M8 16.5h5"/></svg></span>
-              <span class="price">$1,000/Per</span>
+              <span class="price">$1,000<small> per listing</small></span>
             </div>
             <h3>Listing Launch</h3>
             <p class="offer-term">Live in about 14 days · new listing</p>
@@ -388,7 +390,15 @@
           </details>
           <details>
             <summary>Our product isn't an AI agent. Does this apply?</summary>
-            <p>Yes. Six of the seven dimensions apply to any product on AWS Marketplace. Protocol &amp; category fit only matters if AI agents will call your product.</p>
+            <p>Yes. Six of the seven dimensions apply to any product on AWS Marketplace. Protocol &amp; category fit only counts if you tick "AI agents call this product". Otherwise it is left out and your score is out of the 60 points that apply, so you never lose points for it.</p>
+          </details>
+          <details>
+            <summary>Is this an official AWS score?</summary>
+            <p>No. It is my own audit of the listing text, using the same fixed checks on every listing. It shows what a buyer, reviewer or AI search can find on the page. It does not predict AWS approval, search placement or sales.</p>
+          </details>
+          <details>
+            <summary>How is the benchmark built?</summary>
+            <p>I read live AWS Marketplace listings through the AWS Marketplace Discovery API, keep at most two per seller so large sellers don't skew it, and score each one with this same audit. The last refresh was <span data-bench="snapshot">24 September 2026</span>. Only aggregate numbers are published, never a single listing's score.</p>
           </details>
           <details>
             <summary>Why not let AI rewrite the listing?</summary>

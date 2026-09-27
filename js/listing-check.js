@@ -1,6 +1,8 @@
 // Free listing check: scores pasted AWS Marketplace listing copy in the browser on the
 // 7 teardown dimensions (10 points each), then ranks it against the Discovery API
 // snapshot in js/listing-benchmark.js. Deterministic checks only; nothing is sent or stored.
+// Dimension 7 (Protocol & category fit) only counts for agent-facing products: otherwise the
+// score is out of the 60 points that apply, so no product loses points for what it doesn't need.
 // Word lists adapted from the teardown engine's config/wordlists.yaml.
 // The same score() runs in Node (tools/build-benchmark.js) to build that snapshot.
 (function (root) {
@@ -62,7 +64,7 @@
   const countGroups = (text, groups) => Object.values(groups).filter((al) => al.some((a) => hasWord(text, a))).length;
   const sentences = (t) => t.split(/(?<=[.!?])\s+|\n+/).map((s) => s.trim()).filter(Boolean);
 
-  // input: { title, short, highlights (newline list), long, unit, dimDesc, model, privateOffer }
+  // input: { title, short, highlights (newline list), long, unit, dimDesc, model, privateOffer, agent }
   // Pricing inputs may instead arrive pre-judged from the snapshot: unitNamed, dimDescribed (0-1).
   function score(input) {
     const title = (input.title || '').trim();
@@ -155,10 +157,12 @@
     check('proto', countWords(all, W.agentStack) > 0 ? 2 : 0, 2,
       'Name the agent stack you plug into: Amazon Bedrock, AgentCore, Amazon Q, LangChain.');
 
-    const dims = DIMS.map(([k, name]) => ({ key: k, name, score: d[k] }));
-    const raw = dims.reduce((s, x) => s + x.score, 0);
-    fixes.sort((a, b) => b.lost - a.lost);
-    return { raw, total: Math.round((raw / 70) * 100), dims, fixes: fixes.slice(0, 3).map((f) => ({ ...f, dim: DIMS.find(([k]) => k === f.dim)[1] })) };
+    const agent = !!input.agent;
+    const dims = DIMS.map(([k, name]) => ({ key: k, name, score: d[k], applies: agent || k !== 'proto' }));
+    const raw = dims.reduce((s, x) => s + (x.applies ? x.score : 0), 0);
+    const max = agent ? 70 : 60;
+    const open = fixes.filter((f) => agent || f.dim !== 'proto').sort((a, b) => b.lost - a.lost);
+    return { raw, max, agent, total: Math.round((raw / max) * 100), dims, fixes: open.slice(0, 3).map((f) => ({ ...f, dim: DIMS.find(([k]) => k === f.dim)[1] })) };
   }
 
   const api = { score, DIMS, W, countGroups };
@@ -166,17 +170,21 @@
   root.ListingCheck = api;
 
   // ---------- Rank against the Discovery API snapshot ----------
+  // Two distributions of the same listings: core (6 dimensions, /60) and agent (all 7, /70),
+  // so a score is always ranked against listings scored the same way. hist[i] = listings scoring i/100.
   const B = root.LC_BENCH;
-  const percentile = (raw) => {
-    if (!B) return null;
-    const bin = Math.round(raw * 2);
+  const dist = (agent) => (B && (agent ? B.agent : B.core)) || null;
+  const percentile = (res) => {
+    const D = dist(res.agent);
+    if (!D) return null;
     let below = 0;
-    for (let i = 0; i < bin; i++) below += B.hist[i] || 0;
-    return Math.round(((below + (B.hist[bin] || 0) / 2) / B.n) * 100);
+    for (let i = 0; i < res.total; i++) below += D.hist[i] || 0;
+    return Math.round(((below + (D.hist[res.total] || 0) / 2) / B.n) * 100);
   };
-  const higherThan = (raw) => { // listings that score strictly higher
+  const higherThan = (res) => { // listings that score strictly higher
+    const D = dist(res.agent);
     let n = 0;
-    for (let i = Math.round(raw * 2) + 1; i < B.hist.length; i++) n += B.hist[i] || 0;
+    for (let i = res.total + 1; i < D.hist.length; i++) n += D.hist[i] || 0;
     return n;
   };
   const rankText = (p) => (p >= 99 ? 'Top 1%' : p <= 1 ? 'Bottom 1%' : `Better than ${p}%`);
@@ -184,14 +192,15 @@
   const benchCount = () => (B ? `${(Math.floor(B.n / 100) * 100).toLocaleString('en-US')}+` : '');
 
   // Market distribution: listings per 5-point band of the /100 score, with an optional "you" marker.
-  const BANDS = (() => {
-    if (!B) return null;
+  const bandsOf = (D) => {
     const bands = new Array(20).fill(0);
-    B.hist.forEach((c, i) => { bands[Math.min(19, Math.floor(Math.round((i / 2 / 70) * 100) / 5))] += c; });
+    D.hist.forEach((c, i) => { bands[Math.min(19, Math.floor(i / 5))] += c; });
     return bands;
-  })();
-  function marketChart(el, you) {
-    if (!BANDS || !el) return;
+  };
+  function marketChart(el, you, agent) {
+    const D = dist(agent);
+    if (!D || !el) return;
+    const BANDS = bandsOf(D);
     // Drawn at the container's real pixel width so labels stay 10px on any screen.
     const W = Math.max(280, Math.round(el.clientWidth || 400)), H = el.hasAttribute('data-mini') ? 84 : 150;
     const top = Math.max(...BANDS), bw = W / 20;
@@ -201,7 +210,7 @@
       const on = you !== undefined && Math.floor(Math.min(99, you) / 5) === i;
       return `<rect class="mc-bar${on ? ' mc-on' : ''}" x="${i * bw + 1}" y="${H - 16 - h}" width="${bw - 2}" height="${h}" rx="2"><title>Score ${i * 5}–${i * 5 + 4}: ${c} listings</title></rect>`;
     }).join('');
-    const med = `<line class="mc-med" x1="${x(B.medianTotal)}" x2="${x(B.medianTotal)}" y1="6" y2="${H - 16}"/><text class="mc-lbl" x="${x(B.medianTotal) + 4}" y="14">typical ${B.medianTotal}</text>`;
+    const med = `<line class="mc-med" x1="${x(D.median)}" x2="${x(D.median)}" y1="6" y2="${H - 16}"/><text class="mc-lbl" x="${x(D.median) + 4}" y="14">typical ${D.median}</text>`;
     const me = you === undefined ? '' : `<line class="mc-you" x1="${x(you)}" x2="${x(you)}" y1="6" y2="${H - 16}"/><text class="mc-lbl mc-you-lbl" x="${Math.min(x(you) + 4, W - 50)}" y="28">yours ${you}</text>`;
     const axis = [0, 25, 50, 75, 100].map((t) => `<text class="mc-axis" x="${x(t)}" y="${H - 2}" text-anchor="${t === 0 ? 'start' : t === 100 ? 'end' : 'middle'}">${t}</text>`).join('');
     el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Scores of ${benchCount()} live listings${you === undefined ? '' : `, yours at ${you}`}">${bars}${med}${me}${axis}</svg>`;
@@ -231,27 +240,34 @@
   const input = document.getElementById('check-input');
   const out = document.getElementById('check-result');
   const fields = ['title', 'short', 'highlights', 'long', 'unit', 'dimDesc', 'model'];
-  const get = () => ({ ...Object.fromEntries(fields.map((f) => [f, form.elements[f].value])), privateOffer: form.elements.privateOffer.checked });
+  const get = () => ({ ...Object.fromEntries(fields.map((f) => [f, form.elements[f].value])), privateOffer: form.elements.privateOffer.checked, agent: form.elements.agent.checked });
   const set = (d) => {
     fields.forEach((f) => { form.elements[f].value = d[f] || ''; });
     form.elements.privateOffer.checked = !!d.privateOffer;
+    form.elements.agent.checked = !!d.agent;
     form.querySelector('.field-more').open = !!(d.long || d.unit || d.model);
   };
 
-  let lastYou;
+  let lastYou, lastAgent = false;
   function render(res, source) {
-    const p = percentile(res.raw);
-    const bars = res.dims.map((x) =>
-      `<li><span class="bar-name">${x.name}</span><span class="bar-track"><span class="bar-fill" style="width:${x.score * 10}%"></span></span><span class="bar-val">${x.score}/10</span></li>`).join('');
+    const p = percentile(res);
+    const D = dist(res.agent);
+    const bars = res.dims.map((x) => x.applies
+      ? `<li><span class="bar-name">${x.name}</span><span class="bar-track"><span class="bar-fill" style="width:${x.score * 10}%"></span></span><span class="bar-val">${x.score}/10</span></li>`
+      : `<li class="bar-na"><span class="bar-name">${x.name}</span><span class="bar-track"></span><span class="bar-val">n/a</span></li>`).join('');
     const f = res.fixes.length
       ? res.fixes.map((x, i) => `<li><span class="fix-n">${i + 1}</span><div><span class="fix-reader">${x.dim} · +${x.lost} points</span><p>${x.text}</p></div></li>`).join('')
       : '<li><div><p>Nothing left for the automatic audit to find. The hand-done audit in the optimize goes deeper.</p></div></li>';
-    const rank = p === null ? '' : `<p class="score-rank"><strong>${rankText(p)} of live listings.</strong> Typical listing: ${B.medianTotal}. Best live listing: ${B.maxTotal}.</p>`;
+    const when = B ? new Date(`${B.snapshot}T00:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+    const rank = p === null ? '' : `<p class="score-rank"><strong>${rankText(p)} of ${benchCount()} live listings</strong>, all scored the same way (snapshot ${when}). Typical listing: ${D.median}. Best: ${D.max}.</p>`;
+    const basis = res.agent
+      ? `All 7 dimensions apply: ${res.raw} of 70 points, shown out of 100`
+      : `6 dimensions apply: ${res.raw} of 60 points, shown out of 100`;
     out.innerHTML = `
       ${source ? `<p class="score-source">${source}</p>` : ''}
       <div class="score-head">
         <p class="score-num"><strong>${res.total}</strong><span>/100</span></p>
-        <p class="score-band">${p === null ? 'Your score' : band(p)}<span>Scored on 7 dimensions, 10 points each</span></p>
+        <p class="score-band">${p === null ? 'Your score' : band(p)}<span>${basis}</span></p>
       </div>
       ${rank}
       <div class="score-market" data-mini></div>
@@ -261,12 +277,14 @@
       <div class="score-cta">
         <a class="btn btn-primary" href="#offers">Get it fixed</a>
         <button class="btn btn-outline" type="button" data-edit>Edit and rescore</button>
-      </div>`;
+      </div>
+      <p class="score-disclaimer">An independent audit of the listing text you pasted, using fixed word and field checks. It is not an AWS rating and does not predict AWS approval, search placement or sales.</p>`;
     input.hidden = true;
     out.hidden = false;
-    marketChart(out.querySelector('[data-mini]'), res.total);
+    marketChart(out.querySelector('[data-mini]'), res.total, res.agent);
     lastYou = res.total;
-    marketChart(document.getElementById('market-chart'), res.total);
+    lastAgent = res.agent;
+    marketChart(document.getElementById('market-chart'), res.total, res.agent);
     out.querySelector('[data-edit]').addEventListener('click', () => { out.hidden = true; input.hidden = false; form.elements.title.focus(); });
     out.focus();
   }
@@ -294,7 +312,7 @@
   };
   document.querySelectorAll('[data-example]').forEach((b) => b.addEventListener('click', () => loadSample(b.dataset.example, b.hasAttribute('data-run'))));
 
-  const drawMarket = () => marketChart(document.getElementById('market-chart'), lastYou);
+  const drawMarket = () => marketChart(document.getElementById('market-chart'), lastYou, lastAgent);
   drawMarket();
   addEventListener('resize', () => { clearTimeout(drawMarket.t); drawMarket.t = setTimeout(drawMarket, 150); });
 
@@ -304,7 +322,7 @@
   });
   const fact = document.querySelector('[data-sample-fact]');
   if (fact && B) {
-    const r = score(SAMPLES.after), n = higherThan(r.raw);
+    const r = score(SAMPLES.after), n = higherThan(r);
     fact.textContent = n === 0
       ? `${r.total} is higher than every one of the ${B.n.toLocaleString('en-US')} live listings.`
       : `${r.total} is higher than all but ${n} of the ${B.n.toLocaleString('en-US')} live listings.`;
