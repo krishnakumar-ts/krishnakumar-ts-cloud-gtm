@@ -19,7 +19,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <!-- Reveal animations hide content until main.js shows it; if main.js failed, show everything -->
   <script>document.documentElement.classList.add("js");document.addEventListener("DOMContentLoaded",function(){if(!(window.KK&&window.KK.reveal))document.documentElement.classList.remove("js")})</script>
@@ -66,6 +66,7 @@
           <li><a href="#work">What I do</a></li>
           <li class="hide-sm"><a href="#results">Results</a></li>
           <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
           <li><a href="#credentials">Credentials</a></li>
         </ul>
       </nav>
@@ -77,16 +78,16 @@
 
     <!-- HERO -->
     <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-spot" aria-hidden="true"></div>
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="label">Cloud GTM · AWS Marketplace · Partner marketing</p>
-          <h1 id="hero-title">I'm Krishna. I work on <span class="accent">AWS Marketplace GTM.</span></h1>
-          <p class="hero-lede">Digital Marketing Manager, AWS Marketplace GTM at SaaSNova.ai, a US startup doing co-sell and Marketplace GTM for SaaS ISVs. I work on AWS competency programs, the Marketplace Storefront and customer proof, and I built the company website. </p>
-          <div class="hero-actions">
+          <h1 id="hero-title"><span class="h1-line">I'm Krishna.</span> <span class="h1-line">I work on AWS Marketplace GTM.</span></h1>
+          <p class="hero-lede hero-in">Digital Marketing Manager, AWS Marketplace GTM at SaaSNova.ai, a US startup doing co-sell and Marketplace GTM for SaaS ISVs. I work on AWS competency programs, the Marketplace Storefront and customer proof, and I built the company website. </p>
+          <div class="hero-actions hero-in">
             <a class="btn btn-primary" data-enquiry="hire" href="mailto:krishnas2404@gmail.com?subject=Role%20for%20Krishna%3A%20%5Brole%20title%5D&body=Company%3A%0ARole%20title%3A%0AFull-time%20or%20fractional%3A%0ALocation%20(remote%2C%20hybrid%20or%20on-site)%3A%0ABudget%20or%20salary%20range%3A%0ATarget%20start%20date%3A%0AJob%20description%20link%3A%0A">Email me</a>
             <a class="btn btn-outline" href="assets/Krishna-Kumar-TS-Resume.pdf" download>Download résumé</a>
           </div>
-          <ul class="chips" aria-label="At a glance">
+          <ul class="chips hero-in" aria-label="At a glance">
             <li>AWS Certified Cloud Practitioner</li>
             <li>MBA, Business Analytics &amp; Finance</li>
             <li>Madurai, India · remote or relocation</li>
@@ -108,9 +109,12 @@
       <!-- Recruiter-first facts, ordered by relevance to the target role -->
       <div class="wrap">
         <ul class="stats">
-          <li>
-            <p class="stat-value">AI Services</p>
-            <p class="stat-label">AWS Competency earned by SaaSNova.ai. I contributed to the work behind it.</p>
+          <li class="stat-badge">
+            <img src="assets/SaaSNova-AWS-AI-Service-Competency-partner-badge.png" width="189" height="189" alt="AWS Partner AI Services Competency badge held by SaaSNova.ai">
+            <div>
+              <p class="stat-value">AI Services</p>
+              <p class="stat-label">AWS Competency earned by SaaSNova.ai. I contributed to the work behind it.</p>
+            </div>
           </li>
           <li>
             <p class="stat-value">3+ clients</p>
@@ -133,7 +137,6 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <p class="label label-code">// what I do at SaaSNova.ai</p>
             <h2 id="work-title">What I work on.</h2>
           </div>
           <p class="section-aside">I joined SaaSNova.ai in December 2025 for digital marketing. In a small team the scope grew. Each layer is one area, with what I've shipped in it.</p>
@@ -164,6 +167,11 @@
                   <li>Built competency prioritisation research and evidence checklists</li>
                   <li>Researched the AWS partner ecosystem, including the Partner Solution Finder</li>
                 </ul>
+                <div class="partner-badges">
+                  <span class="tilt"><img src="assets/SaaSNova-AWS-AI-Service-Competency-partner-badge.png" width="189" height="189" alt="AWS Partner AI Services Competency badge" loading="lazy"></span>
+                  <span class="tilt"><img src="assets/SaaSNova-AWS-Advanced-Tier-badge.png" width="120" height="120" alt="AWS Partner Advanced Tier Services badge" loading="lazy"></span>
+                  <p>SaaSNova.ai is an AWS Advanced Tier Services Partner with the AI Services Competency. These are the company's badges; the competency work is where I contributed.</p>
+                </div>
               </div>
             </li>
             <li class="layer" data-layer="1">
@@ -232,7 +240,6 @@
         <div class="band">
           <div class="band-head">
             <div>
-              <p class="label label-code label-lilac">// selected work</p>
               <h2 id="results-title">Work you can check yourself.</h2>
             </div>
           </div>
@@ -302,7 +309,6 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <p class="label label-code">// experience</p>
             <h2 id="exp-title">Where I've worked.</h2>
           </div>
         </div>
@@ -350,12 +356,41 @@
       </div>
     </section>
 
+    <!-- SKILLS -->
+    <section class="section skills-section" id="skills" aria-labelledby="skills-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2 id="skills-title">Skills and tools.</h2>
+          </div>
+        </div>
+
+        <div class="skill-groups">
+          <div class="skill-group skill-group-lead">
+            <h3>Cloud GTM</h3>
+            <ul><li>AWS Marketplace</li><li>AWS Partner Network</li><li>AWS Competency</li><li>Marketplace Storefront</li><li>Partner enablement</li><li>Cloud procurement</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Marketing</h3>
+            <ul><li>B2B SaaS marketing</li><li>LinkedIn growth</li><li>Case studies</li><li>Product positioning</li><li>Email marketing</li><li>SEO</li><li>Meta Ads</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Analytics</h3>
+            <ul><li>Market research</li><li>Business analysis</li><li>KPI reporting</li><li>Excel</li><li>Power BI</li><li>GA4</li><li>SPSS</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>AI and tools</h3>
+            <ul><li>Claude Code</li><li>Gemini</li><li>ChatGPT</li><li>HubSpot</li><li>Apollo</li><li>Canva</li><li>GitHub</li><li>VS Code</li><li>Amazon S3</li><li>CloudFront</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- CREDENTIALS -->
     <section class="section credentials" id="credentials" aria-labelledby="cred-title">
       <div class="wrap">
         <div class="section-head">
           <div>
-            <p class="label label-code">// credentials</p>
             <h2 id="cred-title">AWS credentials, all verifiable.</h2>
           </div>
           <p class="section-aside">Badges are on <a href="https://www.credly.com/users/krishna-gtm" target="_blank" rel="noopener">Credly</a>. Certificate copies are in <a href="https://drive.google.com/drive/folders/1IGUJcoxY2f1EwyUcaqwM5jr9USzKPsz_" target="_blank" rel="noopener">this folder</a>.</p>
@@ -422,40 +457,41 @@
       </div>
     </section>
 
-    <!-- EDUCATION, RESEARCH, SKILLS -->
-    <section class="section about" id="about" aria-labelledby="about-title">
+    <!-- EDUCATION -->
+    <section class="section education" id="education" aria-labelledby="edu-title">
       <div class="wrap">
         <div class="section-head">
           <div>
-            <p class="label label-code">// education &amp; skills</p>
-            <h2 id="about-title">Analytics first, then cloud GTM.</h2>
+            <h2 id="edu-title">Education.</h2>
           </div>
         </div>
 
-        <div class="edu-grid">
-          <div class="card reveal">
-            <p class="card-meta">Oct 2023 – May 2025 · CGPA 8.40</p>
-            <h3>MBA, Business Analytics &amp; Finance</h3>
-            <p>Velammal College of Engineering and Technology, Madurai</p>
-          </div>
-          <div class="card reveal">
-            <p class="card-meta">Jun 2020 – May 2023 · CGPA 8.59</p>
-            <h3>BBA, Business Administration</h3>
-            <p>Thiagarajar College, Madurai</p>
-          </div>
-          <div class="card card-feature reveal">
-            <p class="card-meta">Award · Sep 2024</p>
+        <div class="edu-layout">
+          <ol class="edu-list">
+            <li>
+              <div>
+                <p class="edu-when"><time datetime="2023-10">Oct 2023</time> – <time datetime="2025-05">May 2025</time></p>
+                <h3>MBA, Business Analytics &amp; Finance</h3>
+                <p class="edu-school">Velammal College of Engineering and Technology, Madurai</p>
+              </div>
+              <p class="edu-grade"><strong>8.40</strong> CGPA</p>
+            </li>
+            <li>
+              <div>
+                <p class="edu-when"><time datetime="2020-06">Jun 2020</time> – <time datetime="2023-05">May 2023</time></p>
+                <h3>BBA, Business Administration</h3>
+                <p class="edu-school">Thiagarajar College, Madurai</p>
+              </div>
+              <p class="edu-grade"><strong>8.59</strong> CGPA</p>
+            </li>
+          </ol>
+          <div class="award">
+            <p class="edu-when">Award, <time datetime="2024-09">Sep 2024</time></p>
             <h3>Best Research Paper Award</h3>
-            <p>VHNSNC. MBA research on influencer credibility and purchase intent, using regression, ANOVA and Power BI. Also: real-time public sentiment tracking with streaming analytics (2025).</p>
+            <p>VHNSNC. MBA research on influencer credibility and purchase intent, using regression, ANOVA and Power BI.</p>
+            <p>Also: real-time public sentiment tracking with streaming analytics (2025).</p>
           </div>
         </div>
-
-        <dl class="skills">
-          <div><dt>Cloud GTM</dt><dd><span>AWS Marketplace</span><span>AWS Partner Network</span><span>AWS Competency</span><span>Storefront</span><span>Partner enablement</span><span>Cloud procurement</span></dd></div>
-          <div><dt>Marketing</dt><dd><span>B2B SaaS marketing</span><span>LinkedIn growth</span><span>Case studies</span><span>Product positioning</span><span>Email marketing</span><span>SEO</span><span>Meta Ads</span></dd></div>
-          <div><dt>Analytics</dt><dd><span>Market research</span><span>Business analysis</span><span>KPI reporting</span><span>Excel</span><span>Power BI</span><span>GA4</span><span>SPSS</span></dd></div>
-          <div><dt>AI &amp; tools</dt><dd><span>Claude Code</span><span>Gemini</span><span>ChatGPT</span><span>HubSpot</span><span>Apollo</span><span>Canva</span><span>GitHub</span><span>VS Code</span><span>Amazon S3</span><span>CloudFront</span></dd></div>
-        </dl>
       </div>
     </section>
 
@@ -463,6 +499,7 @@
     <section class="section contact" id="contact" aria-labelledby="contact-title">
       <div class="wrap">
         <div class="cta-card">
+          <div class="cta-main">
           <h2 id="contact-title">Hiring for Cloud GTM or AWS Marketplace?</h2>
           <p>Email me the role, or book a 30-minute call. I reply within one business day.</p>
           <div class="hero-actions">
@@ -474,6 +511,13 @@
             <li><a href="https://www.linkedin.com/in/krishnakumar-ts/" target="_blank" rel="noopener">LinkedIn</a></li>
             <li><a href="assets/Krishna-Kumar-TS-Resume.pdf" download>Résumé (PDF)</a></li>
           </ul>
+          </div>
+          <dl class="cta-facts">
+            <div><dt>Open to</dt><dd>Full-time and fractional roles</dd></div>
+            <div><dt>Roles</dt><dd>Cloud GTM, AWS Marketplace, alliances and partner marketing</dd></div>
+            <div><dt>Based in</dt><dd>Madurai, India. Remote or relocation.</dd></div>
+            <div><dt>Certified</dt><dd>AWS Certified Cloud Practitioner</dd></div>
+          </dl>
         </div>
       </div>
     </section>

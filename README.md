@@ -9,9 +9,9 @@ css/style.css           all styling
 js/listing-benchmark.js benchmark counts for the "selected work" strip, generated from the Discovery API snapshot (aggregates only)
 js/enquiry.js           "Email me" dialog: a ready draft to open in Gmail / Outlook / mail app, or copy
 js/assistant.js         offline hiring guide (fixed answers; no AI, no network)
-js/main.js              active nav link, active layer, reveals, chart, count-up
+js/main.js              hero entrance, progress bar, experience rail, cursor grid, badge tilt, nav, layers, reveals, chart, count-up
                         (the three.js scene is inline at the bottom of portfolio.html)
-assets/             photo, résumé PDF, favicon, social preview image
+assets/             photo, résumé PDF, favicon, social preview image, SaaSNova.ai AWS partner badges
 ```
 
 ## Run locally

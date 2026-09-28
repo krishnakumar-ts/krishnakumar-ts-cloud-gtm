@@ -1,4 +1,5 @@
-// UI behaviour: active nav link, active "what I do" layer (drives the 3D stack),
+// UI behaviour: hero entrance, reading progress, experience rail, cursor-lit hero grid,
+// badge tilt, active nav link, active "what I do" layer (drives the 3D stack),
 // scroll reveals, chart draw-in and the stat count-up.
 (function () {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -10,15 +11,58 @@
   ambient.setAttribute('aria-hidden', 'true');
   ambient.innerHTML = '<i></i><i></i>';
   document.body.prepend(ambient);
-  if (!reduceMotion) {
-    let ticking = false;
-    const setScroll = () => {
-      const max = document.documentElement.scrollHeight - innerHeight;
-      document.documentElement.style.setProperty('--scroll', max > 0 ? (scrollY / max).toFixed(3) : 0);
-      ticking = false;
-    };
-    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(setScroll); } }, { passive: true });
-    setScroll();
+
+  // --- Hero entrance (CSS runs it once this class lands; reduced motion shows the end state) ---
+  requestAnimationFrame(() => document.documentElement.classList.add('is-loaded'));
+
+  // --- Scroll-linked values: page progress (nav bar, ambient glows) and the experience rail ---
+  const root = document.documentElement;
+  const timeline = document.querySelector('.timeline');
+  let ticking = false;
+  const setScroll = () => {
+    const max = root.scrollHeight - innerHeight;
+    root.style.setProperty('--scroll', max > 0 ? (scrollY / max).toFixed(3) : 0);
+    if (timeline) {
+      const r = timeline.getBoundingClientRect();
+      const t = Math.min(1, Math.max(0, (innerHeight * 0.6 - r.top) / r.height));
+      timeline.style.setProperty('--t', t.toFixed(3));
+      timeline.querySelectorAll('.role').forEach((role) => role.classList.toggle('is-lit', role.getBoundingClientRect().top < innerHeight * 0.6));
+    }
+    ticking = false;
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(setScroll); } }, { passive: true });
+  addEventListener('resize', setScroll, { passive: true });
+  setScroll();
+
+  // --- Pointer effects: fine pointers only, and never with reduced motion ---
+  if (!reduceMotion && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    // Hero grid lights up around the cursor
+    const hero = document.querySelector('.hero');
+    if (hero) {
+      hero.addEventListener('pointermove', (e) => {
+        const r = hero.getBoundingClientRect();
+        hero.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        hero.style.setProperty('--my', `${e.clientY - r.top}px`);
+        hero.classList.add('is-lit');
+      });
+      hero.addEventListener('pointerleave', () => hero.classList.remove('is-lit'));
+    }
+    // Partner badges tilt toward the cursor, with a glare that follows it
+    document.querySelectorAll('.tilt').forEach((el) => {
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        el.style.setProperty('--ry', `${(x - 0.5) * 24}deg`);
+        el.style.setProperty('--rx', `${(0.5 - y) * 24}deg`);
+        el.style.setProperty('--gx', `${x * 100}%`);
+        el.style.setProperty('--gy', `${y * 100}%`);
+        el.classList.add('is-tilting');
+      });
+      el.addEventListener('pointerleave', () => {
+        el.classList.remove('is-tilting');
+        ['--rx', '--ry'].forEach((p) => el.style.removeProperty(p));
+      });
+    });
   }
 
   // --- Nav height as a CSS variable, so sticky elements sit flush under the (wrapping) nav ---
