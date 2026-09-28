@@ -35,19 +35,10 @@
   // --- Benchmark numbers (js/listing-benchmark.js), rounded so copy never goes stale ---
   const B = window.LC_BENCH;
   if (B) {
-    const val = {
-      count: `${(Math.floor(B.n / 100) * 100).toLocaleString('en-US')}+`,
-      median: String(B.medianTotal), p90: String(B.p90Total), max: String(B.maxTotal),
-      snapshot: new Date(`${B.snapshot}T00:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
-    };
+    const val = { count: `${(Math.floor(B.n / 100) * 100).toLocaleString('en-US')}+` };
     Object.entries(B.stats || {}).forEach(([k, v]) => { val[`stat-${k}`] = `${v}%`; });
-    (B.dimMedian || []).forEach((v, i) => { val[`dim-${i}`] = `${v}/10`; });
     document.querySelectorAll('[data-bench]').forEach((el) => {
-      const v = val[el.dataset.bench];
-      if (!v) return;
-      if (el.classList.contains('proof-num')) el.innerHTML = `<span data-count="${parseInt(v, 10)}">${parseInt(v, 10)}</span>%`;
-      else el.textContent = v;
-      if (el.classList.contains('dim-med')) el.style.setProperty('--v', parseFloat(v) / 10);
+      if (val[el.dataset.bench]) el.textContent = val[el.dataset.bench];
     });
   }
 
