@@ -10,7 +10,7 @@
     fr: { say: 'Where is the role based?', set: { engagement: 'Fractional' }, opts: [['Remote', 'loc:Remote'], ['Hybrid', 'loc:Hybrid'], ['On-site', 'loc:On-site']] },
     send: { rec: { name: 'Email Krishna', term: 'Reply within one business day', why: 'Opens a short draft email with your answers already in it. Add the role and company, then send.', cta: { label: 'Draft the email', enquiry: 'hire' }, alt: { label: 'Book a 30-min call', href: CAL_HIRE } } },
     tour: { say: 'Here\'s where to look:', links: [
-      ['What I do at SaaSNova.ai', '#work'], ['Experience', '#experience'], ['Download the résumé', 'assets/Krishna-Kumar-TS-Resume.pdf']] }
+      ['What I do at SaaSNova.ai', '#work'], ['Experience', '#experience'], ['Request Tailored CV', 'mailto:krishnas2404@gmail.com?subject=Request%20Tailored%20CV']] }
   };
   const answers = {};
 
