@@ -18,12 +18,14 @@
   var anchors = [], idx = 0, shown = 0, mobile = false;
   function measure() {
     mobile = window.innerWidth <= 860;
-    anchors = sections.map(function (s) { return mobile ? s.offsetTop + window.innerHeight * 0.5 : s.offsetTop + s.offsetHeight / 2; });
+    var vh = window.innerHeight;
+    /* each chapter holds the camera still from a to b, so a chapter taller than the screen keeps its object in frame while it is read */
+    anchors = sections.map(function (s) { var half = Math.min(s.offsetHeight / 2, vh / 2); return mobile ? { a: s.offsetTop + vh * 0.5, b: s.offsetTop + vh * 0.5 } : { a: s.offsetTop + half, b: s.offsetTop + s.offsetHeight - half }; });
   }
   function readScroll() {
     var y = window.scrollY + window.innerHeight / 2, n = anchors.length, v = 0;
-    if (y <= anchors[0]) v = 0; else if (y >= anchors[n - 1]) v = n - 1;
-    else for (var i = 0; i < n - 1; i++) if (y >= anchors[i] && y < anchors[i + 1]) { v = i + (y - anchors[i]) / (anchors[i + 1] - anchors[i]); break; }
+    if (y <= anchors[0].a) v = 0; else if (y >= anchors[n - 1].a) v = n - 1;
+    else for (var i = 0; i < n - 1; i++) if (y >= anchors[i].a && y < anchors[i + 1].a) { v = y <= anchors[i].b ? i : i + (y - anchors[i].b) / Math.max(1, anchors[i + 1].a - anchors[i].b); break; }
     idx = v;
     var near = Math.round(v);
     sections.forEach(function (s, i) { s._dot.classList.toggle('on', i === near); });
